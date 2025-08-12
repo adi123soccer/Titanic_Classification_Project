@@ -19,25 +19,39 @@ I used a Titanic dataset from Kaggle, created by M YASSER H, which contains info
 4) Finally I split the data into training and testing sets (80%-20%).
 
 ## Models Used
-1. Logistic Regression: Estimates the chance of survival by modeling the relationship between features and outcome using a curve that outputs probabilities between 0 and 1.
-2. Decision Tree Classifier: Predicts survival by splitting the data into branches with yes/no rules based on feature values until a decision is made.
-3. Random Forest Classifier: Builds many decision trees on random samples and combines their predictions to improve accuracy and reduce errors.
+1. Logistic Regression:  Estimates the chance of survival by modeling the relationship between features and outcome using a curve that outputs probabilities between 0 and 1.
+2. Decision Tree Classifier:  Predicts survival by splitting the data into branches with yes/no rules based on feature values until a decision is made.
+3. Random Forest Classifier: Builds many decision trees on random samples and combines their predictions to improve accuracy and reduce overfitting.
+4. Support Vector Machine (SVM): Finds the best boundary (hyperplane) to separate survivors from non-survivors, but can struggle without feature scaling or tuning.
+5. K-Nearest Neighbors (KNN): Predicts survival based on how similar a passenger is to others nearby in the dataset. Sensitive to feature scaling and noisy data.
+6. Naive Bayes: Uses probabilities and assumes all features are independent, which isn’t true for Titanic data but still gives decent performance.
+7. AdaBoost Classifier: Builds several weak models (usually decision trees) in sequence, where each one focuses on the mistakes of the previous one.
+8. Gradient Boosting Classifier:  Similar to AdaBoost but more powerful — builds trees gradually, each correcting the errors of the last to boost accuracy.
+
+---
 
 All models were trained on the training set and tested on the test set.
 
 ## Results
-| Model               | Accuracy  |
-|---------------------|-----------|
-| Logistic Regression | 0.82      |
-| Decision Tree       | 0.79      |
-| Random Forest       | 0.79      |
+| Model                  | Accuracy |
+|------------------------|----------|
+| Logistic Regression    | 0.82     |
+| Decision Tree          | 0.79     |
+| Random Forest          | 0.79     |
+| SVM                    | 0.66     |
+| K-Nearest Neighbors    | 0.70     |
+| Naive Bayes            | 0.79     |
+| AdaBoost               | 0.80     |
+| Gradient Boosting      | 0.81     |
 
 Logistic Regression performed the best on the test set with an accuracy of 82%.
 
 ## Insights and Learnings
-- I first did this without the class variable, however research showed that it was important and it also improved model accuracy. 
-- I also toyed with the amount of iterations for the Logistic regression model and around 1000 gave the best results. 
-- The Decision tree and random forest model showed very similar results. This is because between there predictions their was only 20 differences. 
+- Initially, I left out the passenger class (`Pclass`) feature, but adding it significantly improved accuracy across all models.
+- I experimented with the number of iterations for Logistic Regression, and setting it to 1000 performed the best.
+- Decision Tree and Random Forest gave nearly identical results because their predictions only differed on 20 passengers.
+- Some models like SVM and KNN underperformed likely due to unscaled features — models sensitive to feature scale may need normalization.
+- Ensemble models like Random Forest, AdaBoost, and Gradient Boosting were more accurate and robust compared to simpler models.
 
 ## Next Steps
 - Experiment with more advanced models or tuning hyperparameters.
